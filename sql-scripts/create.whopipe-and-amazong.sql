@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS whopipe_video_views (
     date_viewed TIMESTAMP DEFAULT now() NOT NULL
 );
 
-DROP TYPE IF EXISTS dpartment;
+DROP TYPE IF EXISTS department;
 CREATE TYPE department AS ENUM (
     'Electronics',
     'Cleaning',

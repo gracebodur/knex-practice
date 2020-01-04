@@ -86,5 +86,59 @@ function paginateProducts(page) {
 
 paginateProducts(2)
 
+//build a query that allows customers to filter 
+//the amazong_products table for products that have images.
+//SQL query: 
+// SELECT product_id, name, price, category, image
+// FROM amazong_products
+// WHERE image IS NOT NULL;
+//knex query below:
 
+function getProductsWithImages() {
+    knexInstance
+      .select('product_id', 'name', 'price', 'category', 'image')
+      .from('amazong_products')
+      .whereNotNull('image')
+      .then(result => {
+        console.log(result)
+      })
+}
+
+getProductsWithImages()
+
+//build a query that allows customers 
+//to see the most popular videos by view 
+//at Whopipe by region for the last 30 days.
+//use the count() function to count the dates viewed
+//group our results by a combination of the video's name and region
+//sort the results by the region and order by the count with most popular first
+//use a WHERE to filter only results within the last 30 days
+//SQL query:
+// SELECT video_name, region, count(date_viewed) AS views
+// FROM whopipe_video_views
+// WHERE date_viewed > (now() - '30 days'::INTERVAL)
+// GROUP BY video_name, region
+// ORDER BY region ASC, views DESC;
+//knex query below:
+
+function mostPopularVideosForDays(days) {
+    knexInstance
+      .select('video_name', 'region')
+      .count('date_viewed AS views')
+      .where(
+        'date_viewed',
+        '>',
+        knexInstance.raw(`now() - '?? days'::INTERVAL`, days)
+      )
+      .from('whopipe_video_views')
+      .groupBy('video_name', 'region')
+      .orderBy([
+        { column: 'region', order: 'ASC' },
+        { column: 'views', order: 'DESC' },
+      ])
+      .then(result => {
+        console.log(result)
+      })
+  }
   
+mostPopularVideosForDays(30)

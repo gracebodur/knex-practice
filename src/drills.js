@@ -77,4 +77,27 @@ function shoppingItemsAddedAfterDate(days) {
     })
 }
 
-shoppingListItemsAfterDate(10)
+shoppingItemsAddedAfterDate(10)
+
+//4. Get the total cost for each category
+//A function that takes no parameters
+//The function will query the shopping_list table 
+//using Knex methods and select the rows grouped 
+//by their category and showing the total price for each category.
+
+function categoryTotalCost() {
+  knexInstance
+    .select('category')
+    .from('shopping_list')
+    .sum('price')
+    .groupBy('category')
+    .then(result => {
+      console.log(result)
+    })
+}
+
+categoryTotalCost()
+  
+  
+
+

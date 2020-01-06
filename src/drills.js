@@ -50,3 +50,31 @@ function paginateShoppingListItems(page) {
 }
 
 paginateShoppingListItems(1)
+
+//3. Get all items added after date
+//A function that takes one parameter for daysAgo 
+//which will be a number representing a number of days.
+//This function will query the shopping_list table 
+//using Knex methods and select the rows which 
+//have a date_added that is greater than the daysAgo.
+
+function shoppingItemsAddedAfterDate(days) {
+  knexInstance
+    .select('name', 'category', 'date_added')
+    .where(
+      'date_added',
+      '>',
+      knexInstance.raw(`now() - '?? days'::INTERVAL`, days)
+    )
+    .from('shopping_list')
+    .groupBy('name', 'category', 'date_added')
+    // .orderBy([
+    //   { column: 'category', order: 'ASC' },
+    //   { column: 'views', order: 'DESC' },
+    // ])
+    .then(result => {
+      console.log(result)
+    })
+}
+
+shoppingListItemsAfterDate(10)

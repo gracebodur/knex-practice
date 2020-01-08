@@ -6,7 +6,12 @@ const ArticlesService = {
         // return 'all the articles!!'
         // return Promise.resolve('all the articles!!')
         return knex.select('*').from('blogful_articles')
-    }
+    },
+    insertArticle() {
+        return Promise.resolve({})
+    },
 }
 
-module.exports = ArticlesService
+
+
+module.exports = ArticlesService //export ArticlesService

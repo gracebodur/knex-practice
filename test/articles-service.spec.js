@@ -39,6 +39,10 @@ describe(`Articles service object`, function() {
 
     after(() => db.destroy())
 
+// we can use separate describe blocks for when the database has data 
+//and when it doesn't. Move the before that inserts rows into the 
+//describe block for getAllArticles() and slightly reword the description:
+
 //     before(() => {
 //         return db
 //             .into('blogful_articles')
@@ -71,6 +75,15 @@ describe(`Articles service object`, function() {
             .then(actual => {
                 expect(actual).to.eql([])
             })
+        })
+
+        it(`insertArticle() inserts a new article and resolves the new article with an 'id'`, () => {
+            const newArticle ={
+                title: 'Test new title',
+                content: 'Test new content',
+                date_published: new Date('2020-01-01T00:00:00.000Z'),
+            }
+            return ArticlesService.insertArticle(db, newArticle)
         })
     })
 })

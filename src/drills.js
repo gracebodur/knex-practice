@@ -7,12 +7,7 @@ const knexInstance = knex({
     connection: process.env.DB_URL
 })
 
-console.log(ShoppingListService.getAllShoppingListItems())
-// knexInstance('shopping_list').select('*')
-//     .then(result => {
-//     console.log(result)
-// })
-
+//QUERIES
 //1. Get all items that contain text
 //A function that takes one parameter for searchTerm which will be any string
 //function will query the shopping_list table using 

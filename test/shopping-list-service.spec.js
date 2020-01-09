@@ -65,4 +65,13 @@ context(`Given 'shopping_list' has data`, () => {
             })
         })
     })
+    
+context(`Given 'shopping_list' has no data`, () => {
+    it(`getAllShoppingListItems() resolves an empty array`, () => {
+        return ShoppingListService.getAllShoppingListItems(db)
+        .then(actual => {
+            expect(actual).to.eql([])
+        })
+    })
+})
 })

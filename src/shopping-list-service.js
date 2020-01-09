@@ -1,6 +1,6 @@
 const ShoppingListService = {
     getAllShoppingListItems(knex) {
-        return knex
+        return knex.select('*').from('shopping_list')
         .select('*')
         .from('shopping_list')
     },
